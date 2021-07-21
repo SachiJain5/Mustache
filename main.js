@@ -6,10 +6,23 @@ function setup(){
     video = createCapture(VIDEO);
     video.size(400, 400);
     video.hide();
+
+    poseNet = ml5.poseNet(video, modelLoaded);
+    poseNet.on("pose", gotPoses);
 }
 function draw(){
     image(video, 0, 0, 400, 400);
 }
 function take_snapshot(){
     save('Mustache.png');
+}
+function modelLoaded(){
+    console.log("poseNet is loaded");
+}
+function gotPoses(results){
+    if(results.lenght > 0){
+        console.log(results);
+        console.log("mustache x = " + results[0].pose.mustache.x);
+        console.log("mustache y = " + results[0].pose.mustache.y);
+    }
 }
