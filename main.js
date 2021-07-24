@@ -1,4 +1,8 @@
+positionX = 0;
+positionY = 0;
+
 function preload(){
+    mustache = loadImage("https://i.postimg.cc/4NnH8k7n/mustache.jpg")
 }
 function setup(){
     canvas = createCanvas(400, 400);
@@ -12,6 +16,7 @@ function setup(){
 }
 function draw(){
     image(video, 0, 0, 400, 400);
+    image(mustache, positionX, positionY, 50, 50);
 }
 function take_snapshot(){
     save('Mustache.png');
@@ -22,7 +27,9 @@ function modelLoaded(){
 function gotPoses(results){
     if(results.lenght > 0){
         console.log(results);
-        console.log("mustache x = " + results[0].pose.mustache.x);
-        console.log("mustache y = " + results[0].pose.mustache.y);
+        positionX = results[0].pose.mustache.x;
+        positionY = results[0].pose.mustache.y;
+        console.log("mustache x = " + positionX);
+        console.log("mustache y = " + positionY);
     }
 }
